@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Form Komentar</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="artikel">
+                <h3>
+                    BACHARUDDIN JUSUF HABIBIE BIOGRAFI BELIAU DALAM HAL
+                    PENGETAHUAN DAN TEKNOLOGI
+                </h3>
+                <hr />
+                <div class="box-artikel">
+                    <div class="hero" style="display: flex; align-items: center; gap: 30px; justify-content: space-around;">
+                        <div class="img">
+                            <img src="./assets/hero.jpeg" alt="" />
+                        </div>
+                        <div class="text">
+                            <p class="pengantar"><b>Pengantar</b></p>
+                            <p style="text-indent: 50px;">
+                                Bacharuddin Jusuf Habibie, atau lebih dikenal sebagai
+                                B.J. Habibie, adalah salah satu tokoh berpengaruh di
+                                dunia terutama dalam bidang teknologi dan industri
+                                penerbangan. Ia lahir pada 25 Juni 1936 di Parepare,
+                                Sulawesi Selatan, Indonesia, dan wafat pada 11 September
+                                2019 di Jakarta. Habibie adalah seorang ilmuwan dan
+                                insinyur yang mengubah wajah teknologi di Indonesia dan
+                                memiliki dampak yang signifikan di mata internasional.
+                            </p>
+                        </div>
+                    </div>
+                    <p><b>Pendidikan</b></p>
+                    <p style="text-indent: 50px;">
+                        Habibie menempuh pendidikan teknik di Jerman dan memperoleh gelar Doktor Teknik pada usia yang sangat muda. Ia kemudian bekerja di perusahaan pesawat terkenal, Messerschmitt-Bölkow-Blohm (MBB), yang membantu mengembangkan teknologi pesawat terbang. Kepiawaian dan pengetahuannya di bidang ini memperoleh pengakuan internasional.
+                    </p>
+                    <p style="text-indent: 50px;">
+                        Dalam karirnya di Indonesia, Habibie memegang berbagai posisi penting, termasuk sebagai Menteri Negara Riset dan Teknologi. Namun, karirnya mencapai puncak saat ia menjabat sebagai Presiden Indonesia pada tahun 1998 setelah pengunduran diri Soeharto. Ia memimpin Indonesia selama kurang lebih 17 bulan, dan selama masa pemerintahannya, ia mengusahakan berbagai reformasi termasuk peningkatan di bidang teknologi dan industri.
+                    </p>
+                    <p style="text-indent: 50px;">
+                        Hal yang paling mencolok dari kontribusi B.J. Habibie adalah dalam pengembangan industri penerbangan di Indonesia. Ia mendirikan PT. Dirgantara Indonesia (sekarang PT. PAL Indonesia) yang fokus pada produksi pesawat terbang. Pencapaian terbesar adalah pengembangan pesawat CN-235 dan N-250, yang diakui di tingkat internasional dan digunakan oleh banyak negara.
+                    </p>
+                    <p style="text-indent: 50px;">
+                        Dampak positif dari kepemimpinan dan karya-karya B.J. Habibie terasa hingga saat ini, terutama di dunia pemrograman dan teknologi informasi. Di bawah pemerintahannya, Indonesia mengalami lonjakan pertumbuhan di sektor teknologi. Hal ini menciptakan fondasi yang kuat bagi kemajuan teknologi, termasuk dalam pemrograman.
+                    </p>
+                    <p style="text-indent: 50px;">
+                        Habibie memandang teknologi informasi sebagai tonggak penting untuk kemajuan suatu negara. Ia mendukung pendidikan teknologi dan sains, mengakui bahwa pemahaman yang kuat dalam bidang ini adalah kunci keberhasilan di era modern. Dalam konteks pemrograman, Habibie memahami pentingnya mempersiapkan generasi muda dengan keterampilan teknologi mutakhir.
+                    </p>
+                    <p style="text-indent: 50px;">
+                        Zaman sekarang, hampir semua aspek kehidupan terkait dengan pemrograman dan teknologi informasi. Kita dapat belajar dari Habibie tentang pentingnya investasi dalam bidang teknologi dan sains. Melalui pendekatan ini, kita dapat menciptakan lingkungan yang mendukung inovasi, memajukan teknologi, dan mencapai kemajuan berkelanjutan.
+                    </p>
+                    <p style="text-indent: 50px;">
+                        Kesimpulannya, B.J. Habibie adalah tokoh yang berpengaruh di dunia, terutama dalam bidang teknologi dan industri penerbangan. Kontribusinya tidak hanya mempengaruhi Indonesia, tetapi juga memberikan dampak signifikan di tingkat global. Pelajaran berharga dari Habibie adalah pentingnya investasi dalam teknologi dan sains untuk mencapai kemajuan yang berkelanjutan, terutama di era di mana pemrograman dan teknologi informasi menjadi tulang punggung banyak sektor kehidupan.
+                    </p>
+                </div>
+            </div>
+            <h1>Form Komentar</h1>
+            <form id="komentarForm">
+                <div class="form-group">
+                    <label for="nama">Nama (maksimal 20 karakter):</label>
+                    <input
+                        type="text"
+                        id="nama"
+                        name="nama"
+                        maxlength="20"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="komentar"
+                        >Komentar (maksimal 160 karakter):</label
+                    >
+                    <textarea
+                        id="komentar"
+                        name="komentar"
+                        rows="4"
+                        cols="50"
+                        maxlength="160"
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit">Kirim Komentar</button>
+            </form>
+
+            <div class="right-column">
+                <h2>Semua Komentar</h2>
+                <ul id="komentarList"></ul>
+            </div>
+        </div>
+
+        <script>
+            document
+                .getElementById("komentarForm")
+                .addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    const nama = document.getElementById("nama").value;
+                    const komentar = document.getElementById("komentar").value;
+                    fetch("/komentar", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ nama, komentar }),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            alert("Komentar berhasil ditambahkan!");
+                            document.getElementById("komentarForm").reset();
+                        })
+                        .catch((error) => console.error("Error:", error));
+                });
+
+            function loadComments() {
+                fetch("/komentar")
+                    .then((response) => response.json())
+                    .then((comments) => {
+                        const komentarList =
+                            document.getElementById("komentarList");
+                        komentarList.innerHTML = "";
+                        comments.forEach((comment) => {
+                            const li = document.createElement("li");
+                            li.textContent = `${comment.nama}:  ${comment.komentar}`;
+                            komentarList.appendChild(li);
+                        });
+                    })
+                    .catch((error) => console.error("Error:", error));
+            }
+
+            // Memanggil fungsi loadComments saat halaman dimuat
+            document.addEventListener("DOMContentLoaded", loadComments);
+        </script>
+    </body>
+</html>

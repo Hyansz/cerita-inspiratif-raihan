@@ -32,7 +32,10 @@ app.use(express.static("./public"));
 
 app.get("/komentar", async (req, res) => {
     try {
-        const comments = await myCollection.find({}).toArray();
+        const comments = await myCollection
+            .find({})
+            .sort({ _id: -1 })
+            .toArray();
         res.json(comments);
     } catch (error) {
         res.status(500).json({ message: error.message });
